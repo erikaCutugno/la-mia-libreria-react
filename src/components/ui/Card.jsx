@@ -14,11 +14,20 @@ export default function Card({
   editor,
 }) {
   console.log("Image URL:", image);
+  const isAbsoluteUrl =
+    image?.startsWith("http://") || image?.startsWith("https://");
+
+  // Costruzione dell'URL corretto per l'immagine
+  const imageUrl = isAbsoluteUrl
+    ? image
+    : `http://localhost:8080/images/${image}`;
+
   return (
     <div className="bg-gray-50 text-gray-900 rounded-xl shadow-2xl group cursor-pointer min-h-100 h-80 sm:h-130 ">
       <div className="group-hover:hidden h-full w-full">
         <img
-          src={`http://localhost:8080/images/${image}`}
+          src={imageUrl}
+          //   src={`http://localhost:8080/images/${image}`}
           alt={title}
           className="h-full object-contain sm:object-cover w-full bg-gray-50"
         />
